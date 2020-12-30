@@ -1,0 +1,6 @@
+# .npmignore 
+
+./src
+./scripts
+./example
+./mock

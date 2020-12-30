@@ -1,0 +1,1 @@
+{"version":3,"sources":["bootstrapStyles.js"],"names":["bootstrapStyles"],"mappings":";;AAAA;;AACA;;AAEA,kCAAc;AACVA,EAAAA,eAAe,EAAE;AADP,CAAd","sourcesContent":["import { updateRuntime } from '../runtimeConfig';\nimport 'bootstrap/dist/css/bootstrap.css';\n\nupdateRuntime({\n    bootstrapStyles: true,\n});\n"]}

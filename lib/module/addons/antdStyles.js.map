@@ -1,0 +1,1 @@
+{"version":3,"sources":["antdStyles.js"],"names":["updateRuntime","antdStyles"],"mappings":"AAAA,SAASA,aAAT,QAA8B,kBAA9B;AACA,OAAO,oBAAP;AAEAA,aAAa,CAAC;AACVC,EAAAA,UAAU,EAAE;AADF,CAAD,CAAb","sourcesContent":["import { updateRuntime } from '../runtimeConfig';\nimport './assets/antd.less';\n\nupdateRuntime({\n    antdStyles: true,\n});\n"]}
