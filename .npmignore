@@ -3,4 +3,13 @@
 ./src
 ./scripts
 ./example
-./mock
+./web-example
+.editorconfig
+.gitignore
+.gitattributes
+.npmignore
+.npmrc
+.prettierignore
+.yarnrc
+babel.config.js
+

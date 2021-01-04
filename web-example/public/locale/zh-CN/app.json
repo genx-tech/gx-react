@@ -1,0 +1,7 @@
+{
+    "module": "app",
+    "locale": "zh-CN",
+    "messages": {
+        "hello": "Hello World!"
+    }
+}

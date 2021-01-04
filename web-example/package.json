@@ -1,0 +1,77 @@
+{
+    "name": "ru-web-portal",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@genx/react": "file:..",
+        "mobx": "^6.0.4",
+        "mobx-react-lite": "^3.1.6",
+        "react-router-dom": "^5.2.0",
+        "superagent": "^6.1.0",
+        "web-vitals": "^0.2.4"
+    },
+    "scripts": {
+        "lint": "eslint \"**/*.js\"",
+        "start": "react-app-rewired start",
+        "build": "react-app-rewired build",
+        "clear": "rimraf -rf ./node_modules/.cache/babel-loader/*",
+        "test": "react-app-rewired test",
+        "eject": "react-scripts eject",
+        "prettier": "prettier --write ."
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+        "@commitlint/config-conventional": "^11.0.0",
+        "@testing-library/jest-dom": "^5.11.4",
+        "@testing-library/react": "^11.1.0",
+        "@testing-library/user-event": "^12.1.10",
+        "babel-plugin-import": "git+https://github.com/genx-tech/babel-plugin-import.git",
+        "commitlint": "^11.0.0",
+        "customize-cra": "^1.0.0",
+        "eslint": "^7.16.0",
+        "husky": "^4.3.6",
+        "prettier": "^2.2.1",
+        "react-app-rewired": "^2.1.8",
+        "react-scripts": "4.0.1"
+    },
+    "eslintIgnore": [
+        "node_modules/",
+        "build/"
+    ],
+    "prettier": {
+        "quoteProps": "consistent",
+        "singleQuote": true,
+        "tabWidth": 4,
+        "trailingComma": "es5",
+        "useTabs": false
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "pre-commit": "npm run lint"
+        }
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    }
+}

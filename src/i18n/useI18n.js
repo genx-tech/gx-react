@@ -6,6 +6,10 @@ import { I18nContext } from './I18nProvider';
 import passThrough from './passThrough';
 
 /**
+ * Features:
+ *  Lazy locale loading, better performance for web app 
+ *  Messages grouped by modules 
+ *  
  * @see {@link https://formatjs.io/guides/message-syntax/} for message syntax
  */
 
@@ -26,26 +30,28 @@ export default function useI18n(moduleName) {
             return cachedModule;
         }
 
-        const localeData = await loader(intl.locale, moduleName);
+        const { messages, ...others } = await loader(intl.locale, moduleName);
+        const messagesWithId = {};
 
-        const messages = {};
+        for (let key in messages) {
+            const msg = messages[key];
+            const id = `${moduleName}.${key}`;
 
-        for (let key in localeData.messages) {
-            let msg = localeData.messages[key];
-            if (typeof msg === 'string') {
-                msg = {
-                    defaultMessage: msg,
-                };
-            }
-            messages[key] = {
-                id: moduleName + '.' + key,
-                ...msg,
-            };
+            messagesWithId[key] =
+                typeof msg === 'string'
+                    ? {
+                          id,
+                          defaultMessage: msg,
+                      }
+                    : {
+                          ...msg,
+                          id,
+                      };
         }
 
         return (cache[moduleKey] = {
-            ...localeData,
-            messages: defineMessages(messages),
+            ...others,
+            messages: defineMessages(messagesWithId),
         });
     }, [loader, intl.locale, moduleName]);
 
