@@ -60,3 +60,5 @@ android/keystores/debug.keystore
 # lib/ //for directly npm i from github
 
 .env.local
+
+/web-example

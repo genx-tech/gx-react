@@ -179,16 +179,16 @@ export default class HttpClient {
 
             return result;
         } catch (error) {
-            if (error.response && error.response.error) {
-                if (this.onError) {
-                    return this.onError(error.response.error);
+            if (error.response && error.response.body) {
+                if (this.onReponseError) {
+                    return this.onReponseError(error.response.body);
                 }
 
-                throw error.response.error;
+                throw error;
             }
 
-            if (this.onError) {
-                return this.onError(error);
+            if (this.onOtherError) {
+                return this.onOtherError(error);
             }
 
             throw error;

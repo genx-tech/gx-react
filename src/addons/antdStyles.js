@@ -1,6 +1,10 @@
-import { updateRuntime } from '../runtimeConfig';
-import './assets/antd.less';
+import { updateRuntime } from '../Runtime';
+import 'antd/dist/antd.css';
 
-updateRuntime({
+const addon = {
     antdStyles: true,
-});
+};
+
+updateRuntime(addon);
+
+export default function initialize() {}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["antdLessStyles.js"],"names":["antdStyles","initialize"],"mappings":";;;;;;;AAAA;;AACA;;AAEA,4BAAc;AACVA,EAAAA,UAAU,EAAE;AADF,CAAd;;AAIe,SAASC,UAAT,GAAsB,CAAE","sourcesContent":["import { updateRuntime } from '../Runtime';\nimport 'antd/dist/antd.less';\n\nupdateRuntime({\n    antdStyles: true,\n});\n\nexport default function initialize() {}\n"]}

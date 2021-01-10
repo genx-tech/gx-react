@@ -13,7 +13,20 @@ export const I18nContext = createContext();
 export default function I18nProvider({ loader, children, ...props }) {
     return (
         <I18nContext.Provider value={{ loader, cache: {} }}>
-            <IntlProvider {...props}>
+            <IntlProvider
+                {...props}
+                onError={(error) => {
+                    if (
+                        error.message.startsWith(
+                            '[@formatjs/intl Error MISSING_TRANSLATION]'
+                        )
+                    ) {
+                        return;
+                    }
+
+                    console.error(error);
+                }}
+            >
                 {children}
             </IntlProvider>
         </I18nContext.Provider>

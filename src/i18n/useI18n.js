@@ -7,9 +7,9 @@ import passThrough from './passThrough';
 
 /**
  * Features:
- *  Lazy locale loading, better performance for web app 
- *  Messages grouped by modules 
- *  
+ *  Lazy locale loading, better performance for web app
+ *  Messages grouped by modules
+ *
  * @see {@link https://formatjs.io/guides/message-syntax/} for message syntax
  */
 
@@ -22,42 +22,51 @@ export default function useI18n(moduleName) {
     const { loader, cache } = useContext(I18nContext);
     const intl = useIntl();
 
-    const moduleKey = `${intl.locale}/${moduleName}`;
-
     const state = useAsyncMemo(async () => {
-        const cachedModule = cache[moduleKey];
-        if (cachedModule) {
-            return cachedModule;
+        if (moduleName) {
+            const moduleKey = `${intl.locale}/${moduleName}`;
+
+            const cachedModule = cache[moduleKey];
+            if (cachedModule) {
+                return cachedModule;
+            }
+
+            const { messages, ...others } = await loader(
+                intl.locale,
+                moduleName
+            );
+            const messagesWithId = {};
+
+            for (let key in messages) {
+                const msg = messages[key];
+                const id = `${moduleName}.${key}`;
+
+                messagesWithId[key] =
+                    typeof msg === 'string'
+                        ? {
+                              id,
+                              defaultMessage: msg,
+                          }
+                        : {
+                              ...msg,
+                              id,
+                          };
+            }
+
+            return (cache[moduleKey] = {
+                ...others,
+                key: moduleKey,
+                messages: defineMessages(messagesWithId),
+            });
         }
 
-        const { messages, ...others } = await loader(intl.locale, moduleName);
-        const messagesWithId = {};
-
-        for (let key in messages) {
-            const msg = messages[key];
-            const id = `${moduleName}.${key}`;
-
-            messagesWithId[key] =
-                typeof msg === 'string'
-                    ? {
-                          id,
-                          defaultMessage: msg,
-                      }
-                    : {
-                          ...msg,
-                          id,
-                      };
-        }
-
-        return (cache[moduleKey] = {
-            ...others,
-            messages: defineMessages(messagesWithId),
-        });
+        return null;
     }, [loader, intl.locale, moduleName]);
 
     if (state.loading || state.value == null) {
         return {
             ...state,
+            intl,
             t: identity,
         };
     }
@@ -66,6 +75,7 @@ export default function useI18n(moduleName) {
 
     return {
         loading: false,
+        intl,
         t: (messageId, vars) =>
             intlMessages[messageId] == null
                 ? passThrough(messageId)

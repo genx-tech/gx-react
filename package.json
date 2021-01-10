@@ -26,7 +26,7 @@
         "release": "release-it",
         "example": "yarn --cwd example",
         "prettier": "prettier --write .",
-        "web": "npm run build && cd web-example && npm start"
+        "web": "npm run build && cd web-example && sh ./scripts/runAsExample.sh"
     },
     "keywords": [
         "react-native",
@@ -48,7 +48,7 @@
         "@material-ui/core": "^4.11.2",
         "@react-native-community/eslint-config": "^2.0.0",
         "@release-it/conventional-changelog": "^2.0.0",
-        "antd": "^4.9.4",
+        "antd": "^4.10.0",
         "bootstrap": "^4.5.3",
         "commitlint": "^11.0.0",
         "eslint": "^7.2.0",
@@ -62,10 +62,11 @@
         "pod-install": "^0.1.0",
         "prettier": "^2.0.5",
         "react": "^17.0.1",
-        "react-dom": "^17.0.1",        
+        "react-dom": "^17.0.1",
         "react-native": "^0.63.4",
         "react-native-builder-bob": "^0.17.1",
         "react-native-web": "^0.14.10",
+        "react-router-dom": "^5.2.0",
         "reactstrap": "^8.8.1",
         "release-it": "^14.2.2"
     },

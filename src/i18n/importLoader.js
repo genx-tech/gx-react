@@ -1,10 +1,13 @@
-import Runtime from '../runtimeConfig';
+import Runtime from '../Runtime';
 
 export default (pathBuilder) => async (locale, moduleName) => {
     const path = pathBuilder(locale, moduleName);
-    Runtime.reportLoadingLocale?.('importLoader', path);
+    Runtime.log(
+        'verbose',
+        () => `"importLoader" loader is loading locale data from "${path}"`
+    );
 
-    const localeModule = await import(path);
+    const localeModule = await Runtime.import_(path);
     const { default: localeConfig } = localeModule;
     return localeConfig;
 };

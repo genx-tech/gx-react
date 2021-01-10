@@ -1,4 +1,5 @@
 /example
-/web-example
+/web-example/build
+/web-example/node_modules
 /lib
 /node_modules
