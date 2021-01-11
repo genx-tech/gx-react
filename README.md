@@ -2,6 +2,8 @@
 
 Gen-X React Library (React & React Native)
 
+Version 0.1.0
+
 ## Installation
 
 ```sh
@@ -11,7 +13,7 @@ npm install @genx/react
 ## Usage
 
 ```js
-import { useAsyncMemo } from '@genx/react;
+import { useAsyncMemo } from '@genx/react/hooks;
 
 // function component
 function (props) {
@@ -28,6 +30,23 @@ function (props) {
     //do someting with value
 }
 ```
+
+## Components
+
+-   hoc
+    -   **inject** - Inject object as predefined props into a component
+    -   **renderLazy** - Render a component with React.lazy and dynamic import (requires project to update the localized import method into Runtime)
+    -   **withObserver** - inject + observer
+    -   **withOnLocationChange** - Inject an onLocationChange prop and listen to react-router's history.listen
+    -   **withStyles** - Inject a useStyles method into a component, which returns the built styles object passed in withStyles (The reason to inject useStyles instead of the built styles object is for compatible with all popular styling system, e.g. mui, bootstrap)
+    -   **withSuspense** - Wrap the component with Suspense and default fallback
+-   hooks
+    -   **useAsyncCallback** - Async version of useCallback, but returns { loading, value, error }
+    -   **useAsyncMemo** - Async version of useMemo, but returns { loading, value, error }
+    -   **useAsyncProgress** - useAsyncMemo + progress report, just keep in mind that when progress advances, the component using this hook will also be re-rendered
+    -   **useDeepDeps** - For use object-like param as the dependencies of hooks
+    -
+-
 
 ## Developer code
 
@@ -51,7 +70,7 @@ _"commit-hook" has been set to automatically check lint errors_
 
 -   Exceptions
 
-_May use eslint comment to disable warning or error you 100% sure that's correct and reasonable_
+_May use eslint comment to disable warning or error if you 100% sure that's correct and reasonable_
 
 Block commment
 

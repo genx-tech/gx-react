@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import { Menu } from 'antd';
 
+import renderIt from '../hoc/renderIt';
 import locationPathToNodes from '../utils/locationPathToNodes';
 
 const { SubMenu } = Menu;
@@ -11,7 +12,7 @@ const SideMenu = ({ sitemap, formatPathText, ...props }) => {
     const nodes = locationPathToNodes(location.pathname);
 
     const makeMenuItems = (routes) =>
-        routes.map(({ path, icon: Icon, showInMenu, subRoutes, disabled }) => {
+        routes.map(({ path, icon, showInMenu, subRoutes, disabled }) => {
             if (!showInMenu) {
                 return false;
             }
@@ -22,7 +23,7 @@ const SideMenu = ({ sitemap, formatPathText, ...props }) => {
                         key={path}
                         title={
                             <span>
-                                {Icon && <Icon />}
+                                {renderIt(icon)}
                                 <span>{formatPathText(path)}</span>
                             </span>
                         }
@@ -32,13 +33,13 @@ const SideMenu = ({ sitemap, formatPathText, ...props }) => {
                 );
             }
 
-            return menuItem(path, Icon, disabled);
+            return menuItem(path, icon, disabled);
         });
 
-    const menuItem = (path, Icon, disabled) => {
+    const menuItem = (path, icon, disabled) => {
         const inner = (
             <>
-                {Icon && <Icon />}
+                {renderIt(icon)}
                 <span>{formatPathText(path)}</span>
             </>
         );
