@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 import { useIntl, defineMessages } from 'react-intl';
+
+import Runtime from '../Runtime';
 import useAsyncMemo from '../hooks/useAsyncMemo';
 import { identity } from '../utils/callback';
 import { I18nContext } from './I18nProvider';
@@ -13,13 +15,15 @@ import passThrough from './passThrough';
  * @see {@link https://formatjs.io/guides/message-syntax/} for message syntax
  */
 
+const cache = {};
+
 /**
  * Returns a translator { t = (text, variables) => <translated and injected text> } of specified locale module.
  * @param {string} [moduleName]
  * @returns {Object} { loading, t }
  */
 export default function useI18n(moduleName) {
-    const { loader, cache } = useContext(I18nContext);
+    const { loader } = useContext(I18nContext);
     const intl = useIntl();
 
     const state = useAsyncMemo(async () => {
@@ -28,6 +32,10 @@ export default function useI18n(moduleName) {
 
             const cachedModule = cache[moduleKey];
             if (cachedModule) {
+                Runtime.log(
+                    'verbose',
+                    () => `Load locale data "${moduleKey}" from cache.`
+                );
                 return cachedModule;
             }
 

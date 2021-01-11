@@ -12,7 +12,7 @@ export const I18nContext = createContext();
  */
 export default function I18nProvider({ loader, children, ...props }) {
     return (
-        <I18nContext.Provider value={{ loader, cache: {} }}>
+        <I18nContext.Provider value={{ loader }}>
             <IntlProvider
                 {...props}
                 onError={(error) => {
