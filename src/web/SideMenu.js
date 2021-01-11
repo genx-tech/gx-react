@@ -12,7 +12,7 @@ const SideMenu = ({ sitemap, formatPathText, ...props }) => {
     const nodes = locationPathToNodes(location.pathname);
 
     const makeMenuItems = (routes) =>
-        routes.map(({ path, icon, showInMenu, subRoutes, disabled }) => {
+        routes.map(({ path, icon, showInMenu, subRoutes, menuProps }) => {
             if (!showInMenu) {
                 return false;
             }
@@ -21,32 +21,35 @@ const SideMenu = ({ sitemap, formatPathText, ...props }) => {
                 return (
                     <SubMenu
                         key={path}
-                        title={
-                            <span>
-                                {renderIt(icon)}
-                                <span>{formatPathText(path)}</span>
-                            </span>
-                        }
+                        icon={renderIt(icon)}
+                        title={<span>{formatPathText(path)}</span>}
+                        {...menuProps}
                     >
                         {makeMenuItems(subRoutes)}
                     </SubMenu>
                 );
             }
 
-            return menuItem(path, icon, disabled);
+            return menuItem(path, icon, menuProps);
         });
 
-    const menuItem = (path, icon, disabled) => {
+    const menuItem = (path, icon, menuProps) => {
+        const text = formatPathText(path);
+
         const inner = (
             <>
-                {renderIt(icon)}
-                <span>{formatPathText(path)}</span>
+                <span>{text}</span>
             </>
         );
 
         return (
-            <Menu.Item key={path}>
-                {disabled ? inner : <NavLink to={path}>{inner}</NavLink>}
+            <Menu.Item
+                key={path}
+                icon={renderIt(icon)}
+                title={text}
+                {...menuProps}
+            >
+                <NavLink to={path}>{inner}</NavLink>
             </Menu.Item>
         );
     };
