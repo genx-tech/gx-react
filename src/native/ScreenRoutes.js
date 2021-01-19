@@ -9,7 +9,13 @@ export const ScreenRoutes = ({ screens, ...props }) => {
         <Stack.Navigator {...props}>
             {sitemap.screens.map((node, i) => {
                 const Component = Runtime.lazyLoad(node.component);
-                return <Stack.Screen key={i} name={node.name} component={Component} />;
+                return (
+                    <Stack.Screen
+                        key={i}
+                        name={node.name}
+                        component={Component}
+                    />
+                );
             })}
         </Stack.Navigator>
     );

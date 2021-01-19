@@ -38,7 +38,7 @@ const config = {
         modulesRegistry[url] = loadedModule;
     },
     /**
-     * 
+     *
      * @param {*} url - component url
      */
     lazyLoad: (url) => config.import_(url) || config.notFoundFallbabck,

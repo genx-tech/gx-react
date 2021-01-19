@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {Block} from 'galio-framework';
+import React, { Component } from 'react';
+import { Block } from 'galio-framework';
 
-import {View, Text, TouchableWithoutFeedback} from 'react-native';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const CheckBox = (props) => {
@@ -29,7 +29,7 @@ const CheckBox = (props) => {
             }
             color={disabled ? disabledColor : activeColor}
             size={size}
-            style={{marginRight: 4}}
+            style={{ marginRight: 4 }}
         />
     );
     const uncheckedIcon = (
@@ -41,7 +41,7 @@ const CheckBox = (props) => {
             }
             color={defaultColor}
             size={size}
-            style={{marginRight: 4}}
+            style={{ marginRight: 4 }}
         />
     );
 
@@ -50,15 +50,17 @@ const CheckBox = (props) => {
             {splitTitle ? (
                 <Block row top>
                     <TouchableWithoutFeedback
-                        style={{flex: 1}}
+                        style={{ flex: 1 }}
                         onPress={onPress}
-                        disabled={disabled}>
+                        disabled={disabled}
+                    >
                         {checked ? checkedIcon : uncheckedIcon}
                     </TouchableWithoutFeedback>
                     {typeof title === 'string' ? (
                         <Text
                             numberOfLines={0}
-                            style={[{marginLeft: 4}, titleStyle]}>
+                            style={[{ marginLeft: 4 }, titleStyle]}
+                        >
                             {title}
                         </Text>
                     ) : (
@@ -67,15 +69,17 @@ const CheckBox = (props) => {
                 </Block>
             ) : (
                 <TouchableWithoutFeedback
-                    style={{flex: 1}}
+                    style={{ flex: 1 }}
                     onPress={onPress}
-                    disabled={disabled}>
+                    disabled={disabled}
+                >
                     <Block row middle>
                         {checked ? checkedIcon : uncheckedIcon}
                         {typeof title === 'string' ? (
                             <Text
                                 numberOfLines={0}
-                                style={[{marginLeft: 4}, titleStyle]}>
+                                style={[{ marginLeft: 4 }, titleStyle]}
+                            >
                                 {title}
                             </Text>
                         ) : (
