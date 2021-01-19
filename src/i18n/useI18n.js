@@ -18,6 +18,42 @@ import passThrough from './passThrough';
 const cache = {};
 
 /**
+ * Register a preloaded locale module
+ * @param {*} loader
+ * @param {*} locale
+ * @param {*} moduleName
+ */
+export const registerLocale = (locale, moduleName, loadedModule) => {
+    const { messages, ...others } = loadedModule;
+    const messagesWithId = {};
+
+    for (let key in messages) {
+        const msg = messages[key];
+        const id = `${moduleName}.${key}`;
+
+        //todo: be replaced with pre-compiled locale data
+        messagesWithId[key] =
+            typeof msg === 'string'
+                ? {
+                      id,
+                      defaultMessage: msg,
+                  }
+                : {
+                      ...msg,
+                      id,
+                  };
+    }
+
+    const moduleKey = `${locale}/${moduleName}`;
+
+    return (cache[moduleKey] = {
+        ...others,
+        key: moduleKey,
+        messages: defineMessages(messagesWithId),
+    });
+};
+
+/**
  * Returns a translator { t = (text, variables) => <translated and injected text> } of specified locale module.
  * @param {string} [moduleName]
  * @returns {Object} { loading, t }
@@ -39,33 +75,14 @@ export default function useI18n(moduleName) {
                 return cachedModule;
             }
 
-            const { messages, ...others } = await loader(
-                intl.locale,
-                moduleName
+            return (
+                loader &&
+                registerLocale(
+                    intl.locale,
+                    moduleName,
+                    await loader(intl.locale, moduleName)
+                )
             );
-            const messagesWithId = {};
-
-            for (let key in messages) {
-                const msg = messages[key];
-                const id = `${moduleName}.${key}`;
-
-                messagesWithId[key] =
-                    typeof msg === 'string'
-                        ? {
-                              id,
-                              defaultMessage: msg,
-                          }
-                        : {
-                              ...msg,
-                              id,
-                          };
-            }
-
-            return (cache[moduleKey] = {
-                ...others,
-                key: moduleKey,
-                messages: defineMessages(messagesWithId),
-            });
         }
 
         return null;

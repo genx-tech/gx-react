@@ -1,5 +1,6 @@
 import React, { createContext } from 'react';
 import { IntlProvider } from 'react-intl';
+import Runtime from '../Runtime';
 
 export const I18nContext = createContext();
 
@@ -24,7 +25,7 @@ export default function I18nProvider({ loader, children, ...props }) {
                         return;
                     }
 
-                    console.error(error);
+                    Runtime.log('error', () => error);
                 }}
             >
                 {children}

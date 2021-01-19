@@ -1,4 +1,5 @@
-import { withGalio } from 'galio-framework';
+import React from 'react';
+import { withGalio, GalioProvider } from 'galio-framework';
 import { updateRuntime } from '../Runtime';
 
 updateRuntime({
@@ -8,4 +9,10 @@ updateRuntime({
     ],
 });
 
-export default function initialize() {}
+export default function initialize(theme) {
+    return (App) => ({ props }) => (
+        <GalioProvider theme={theme}>
+            <App {...props} />
+        </GalioProvider>
+    );
+}
