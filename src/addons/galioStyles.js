@@ -15,4 +15,4 @@ export default function initialize(theme) {
             <App {...props} />
         </GalioProvider>
     );
-}
+};
