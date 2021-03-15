@@ -1,7 +1,7 @@
 import { dropIfEndsWith } from './string';
 
 export default function (pathname, query, hash, options) {
-    let loc = window.location;
+    let loc = window?.location || { pathname: '/', search: '' }; // SSR fallback value
     let webPath;
 
     //pathname

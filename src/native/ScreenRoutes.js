@@ -7,7 +7,7 @@ const Stack = createStackNavigator();
 export const ScreenRoutes = ({ screens, ...props }) => {
     return (
         <Stack.Navigator {...props}>
-            {sitemap.screens.map((node, i) => {
+            {screens.map((node, i) => {
                 const Component = Runtime.lazyLoad(node.component);
                 return (
                     <Stack.Screen

@@ -39,11 +39,7 @@ const deleteKeys_ = async () => {
 };
 
 const createSignature_ = async (payload) => {
-    const {
-        success,
-        signature,
-        error,
-    } = await ReactNativeBiometrics.createSignature({
+    const { success, signature } = await ReactNativeBiometrics.createSignature({
         promptMessage: 'Sign in',
         payload: payload,
     });

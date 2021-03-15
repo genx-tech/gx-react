@@ -12,28 +12,30 @@ const SideMenu = ({ sitemap, formatPathText, ...props }) => {
     const nodes = locationPathToNodes(location.pathname);
 
     const makeMenuItems = (routes) =>
-        routes.map(({ path, icon, showInMenu, subRoutes, menuProps }) => {
-            if (!showInMenu) {
-                return false;
+        routes.map(
+            ({ path, icon, showInMenu, subRoutes, menuProps, exact }) => {
+                if (!showInMenu) {
+                    return false;
+                }
+
+                if (subRoutes) {
+                    return (
+                        <SubMenu
+                            key={path}
+                            icon={renderIt(icon)}
+                            title={<span>{formatPathText(path)}</span>}
+                            {...menuProps}
+                        >
+                            {makeMenuItems(subRoutes)}
+                        </SubMenu>
+                    );
+                }
+
+                return menuItem(path, icon, menuProps, exact);
             }
+        );
 
-            if (subRoutes) {
-                return (
-                    <SubMenu
-                        key={path}
-                        icon={renderIt(icon)}
-                        title={<span>{formatPathText(path)}</span>}
-                        {...menuProps}
-                    >
-                        {makeMenuItems(subRoutes)}
-                    </SubMenu>
-                );
-            }
-
-            return menuItem(path, icon, menuProps);
-        });
-
-    const menuItem = (path, icon, menuProps) => {
+    const menuItem = (path, icon, menuProps, exact) => {
         const text = formatPathText(path);
 
         const inner = (
@@ -49,7 +51,9 @@ const SideMenu = ({ sitemap, formatPathText, ...props }) => {
                 title={text}
                 {...menuProps}
             >
-                <NavLink to={path}>{inner}</NavLink>
+                <NavLink to={path} exact={exact}>
+                    {inner}
+                </NavLink>
             </Menu.Item>
         );
     };

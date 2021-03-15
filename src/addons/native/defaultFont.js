@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text, Platform } from 'react-native';
 import applyFontGlobally from 'react-native-font-global';
 
