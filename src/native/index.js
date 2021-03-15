@@ -1,2 +1,5 @@
 export { default as AppContainer } from './AppContainer';
-export { default as ScreenRoutes } from './ScreenRoutes';
+export { default as StaticRoutes } from './StaticRoutes';
+export { default as CheckBox } from './CheckBox';
+// export { default as FaceRecognition } from './FaceRecognition';
+export * from './FaceRecognition';

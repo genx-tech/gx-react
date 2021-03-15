@@ -1,3 +1,4 @@
+import React from 'react';
 import checkJsRuntime from './utils/checkJsRuntime';
 import {
     makeLogger,

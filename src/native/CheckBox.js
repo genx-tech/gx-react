@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Block } from 'galio-framework';
 
 import { View, Text, TouchableWithoutFeedback } from 'react-native';

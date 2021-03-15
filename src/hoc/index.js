@@ -1,3 +1,3 @@
-export * as inject from './inject';
-export * as withObserver from './withObserver';
-export * as withStyles from './withStyles';
+export { default as inject } from './inject';
+export { default as withObserver } from './withObserver';
+export { default as withStyles } from './withStyles';

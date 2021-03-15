@@ -1,21 +1,8 @@
-import React from 'react';
-import {
-    makeStyles,
-    ThemeProvider,
-    createMuiTheme,
-} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import { updateRuntime } from '../Runtime';
 
 updateRuntime({
     muiStyles: (Component, styles) => [Component, makeStyles(styles)],
 });
 
-export default function initialize(theme) {
-    const muiTheme = createMuiTheme(theme);
-
-    return (App) => ({ props }) => (
-        <ThemeProvider theme={muiTheme}>
-            <App {...props} />
-        </ThemeProvider>
-    );
-}
+export default function initialize() {}
