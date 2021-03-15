@@ -1,1 +1,1 @@
-{"version":3,"sources":["index.js"],"names":[],"mappings":";;;;;;;;;;;;AAAA","sourcesContent":["export { default as HttpClient } from './HttpClient';\n"]}
+{"version":3,"sources":["index.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;AAAA;;AACA","sourcesContent":["export { default as HttpClient } from './HttpClient';\nexport { default as LocalStorage } from './LocalStorage';\n"]}
