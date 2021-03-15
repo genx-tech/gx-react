@@ -33,10 +33,10 @@ const renderScreens = (Screen, screens) =>
 const BottomTabNavigator = ({ screens, ...props }) => {
     const Tab = useMemo(() => createBottomTabNavigator(), []);
 
-    const mapOfIcon = screens.reduce(
-        (r, node) => ((r[node.name] = node.icon), r),
-        {}
-    );
+    const mapOfIcon = screens.reduce((r, node) => {
+        r[node.name] = node.icon;
+        return r;
+    }, {});
 
     const screenOptions = ({ route }) => ({
         tabBarIcon: mapOfIcon[route.name],
