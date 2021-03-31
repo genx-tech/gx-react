@@ -24,5 +24,5 @@ export function queryStringToObject(qs) {
 
 export default {
     join,
-    queryStringToObject
+    queryStringToObject,
 };

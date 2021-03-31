@@ -1,0 +1,61 @@
+{
+    "name": "ru-web-portal",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@genx/react": "file:.."
+    },
+    "scripts": {
+        "lint": "eslint \"**/*.js\"",
+        "start": "react-app-rewired start --expose-gc --max-old-space-size=12000",
+        "build": "npm run clear && react-app-rewired build --max-old-space-size=8192",
+        "clear": "rimraf -rf ./node_modules/.cache/babel-loader/*",
+        "test": "react-app-rewired test",
+        "eject": "react-scripts eject",
+        "prettier": "prettier --write ."
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "eslintIgnore": [
+        "node_modules/",
+        "build/"
+    ],
+    "prettier": {
+        "quoteProps": "consistent",
+        "singleQuote": true,
+        "tabWidth": 4,
+        "trailingComma": "es5",
+        "useTabs": false
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "pre-commit": "npm run lint"
+        }
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
+    "devDependencies": {
+        "customize-cra": "^1.0.0",
+        "react-app-rewired": "^2.1.8"
+    }
+}

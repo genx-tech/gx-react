@@ -59,10 +59,11 @@ const makeMenuItems = (routes, formatPathText) => {
 
 const SideMenu = ({ sitemap, formatPathText, ...props }) => {
     const location = useLocation();
-    const [menuItems, nodePathes] = useMemo(() => makeMenuItems(sitemap, formatPathText), [
-        sitemap, formatPathText
-    ]);
-    const allPossibleNodes = locationPathToNodes(location.pathname);    
+    const [menuItems, nodePathes] = useMemo(
+        () => makeMenuItems(sitemap, formatPathText),
+        [sitemap, formatPathText]
+    );
+    const allPossibleNodes = locationPathToNodes(location.pathname);
 
     const nodes = allPossibleNodes.filter((link, i) => {
         if (link in nodePathes) {
