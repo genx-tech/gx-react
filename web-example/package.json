@@ -8,7 +8,7 @@
     "scripts": {
         "lint": "eslint \"**/*.js\"",
         "start": "react-app-rewired start --expose-gc --max-old-space-size=12000",
-        "build": "npm run clear && react-app-rewired build --max-old-space-size=8192",
+        "build": "npm run clear && GENERATE_SOURCEMAP=false react-app-rewired build --max-old-space-size=8192",
         "clear": "rimraf -rf ./node_modules/.cache/babel-loader/*",
         "test": "react-app-rewired test",
         "eject": "react-scripts eject",

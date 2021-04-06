@@ -7,6 +7,8 @@ import { Runtime } from '@genx/react';
 import settings from 'config/settings';
 import appStore from 'stores/appStore';
 
+import './icons';
+
 Runtime.update({
     //dynamic import have to be placed in project code, since the resolver will use relative path to load dynamic module
     import_: (url) => import('./' + url),

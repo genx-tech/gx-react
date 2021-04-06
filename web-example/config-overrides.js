@@ -7,6 +7,9 @@ module.exports = override(
         path.resolve('src'),
         path.resolve('../node_modules/galio-framework/src'),
         path.resolve('../node_modules/react-native-vector-icons/lib'),
+        path.resolve('../node_modules/react-native-elements'),
+        path.resolve('../node_modules/react-native-ratings'),
+        path.resolve('../node_modules/react-native-camera/src'),
     ]),
 
     fixBabelImports('antd', {

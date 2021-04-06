@@ -1,32 +1,38 @@
+import React from 'react';
 import Runtime from '../Runtime';
 
 class ViewFactory {
-    constructor(builders, styles) {
-        this.builders = builders;
+    constructor(components, styles) {
+        this.components = components;
         this.styles = styles;
     }
 
-    build(item, value, inline, key) {
-        const builder = this.builders[item.type];
+    getComponent(type) {
+        const Component = this.components[type];
 
-        console.log(item, value, inline, key);
-
-        if (!builder) {
-            Runtime.log('error', () => `Unknown view item type: ${item.type}`);
+        if (!Component) {
+            Runtime.log('warning', () => `Unsupported component type: ${type}`);
             return false;
         }
 
-        return builder(item, value, inline, key, this.styles);
+        return Component;
     }
 
-    wrapInlineRow(content, key) {
-        const wrapper = this.builders['$inline'];
-        return wrapper(content, key);
+    build(meta, value, inline, key) {
+        const Component = this.getComponent(meta.type);
+
+        return (
+            Component && (
+                <Component
+                    {...{ meta, value, inline, key, styles: this.styles }}
+                />
+            )
+        );
     }
 
-    wrapRow(content, key) {
-        const wrapper = this.builders['$row'];
-        return wrapper(content, key);
+    wrap(wrapperType, content, key) {
+        const Wrapper = this.getComponent(wrapperType);
+        return Wrapper && <Wrapper {...{ content, key }} />;
     }
 }
 

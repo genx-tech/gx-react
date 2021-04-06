@@ -33,19 +33,19 @@ function buildItem(meta, value, inline, key, factory) {
     }
 
     if (meta.inline) {
-        return factory.wrapInlineRow(content, key);
+        return factory.wrap('$inline', content, key);
     }
 
-    return factory.wrapRow(content, key);
+    return factory.wrap('$row', content, key);
 }
 
-const JsonView = ({ data, value, factory }) => {
-    const view = useMemo(
-        () => buildItem({ items: data }, value, false, undefined, factory),
-        [data, value, factory]
+const JsonView = ({ view, value, factory }) => {
+    const jsxView = useMemo(
+        () => buildItem({ items: view }, value, false, undefined, factory),
+        [view, value, factory]
     );
 
-    return <View>{view}</View>;
+    return <View>{jsxView}</View>;
 };
 
 export default JsonView;
