@@ -27,7 +27,7 @@ export default function NativeView({ component, ...props }) {
             };
         },
         /* eslint-disable react-hooks/exhaustive-deps */
-        []
+        [props]
         /* eslint-enable react-hooks/exhaustive-deps */
     );
 
