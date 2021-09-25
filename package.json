@@ -33,8 +33,14 @@
     },
     "devDependencies": {
         "@react-native-community/bob": "^0.17.1",
+        "husky": "^7.0.2",
         "lerna": "^4.0.0",
-        "patch-package": "^6.4.7"
+        "patch-package": "^6.4.7",
+        "@commitlint/cli": "^13.1.0",
+        "@commitlint/config-conventional": "^13.1.0",
+        "@react-native-community/eslint-config": "^2.0.0",
+        "eslint": "7.14.0",
+        "prettier": "^2.4.1"
     },
     "peerDependencies": {
         "react": "*",
