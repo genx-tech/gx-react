@@ -1,21 +1,24 @@
 import React from 'react';
-import {
-    makeStyles,
-    ThemeProvider,
-    createMuiTheme,
-} from '@material-ui/core/styles';
+import { makeStyles, ThemeProvider } from '@material-ui/styles';
 import { updateRuntime } from '../Runtime';
 
 updateRuntime({
-    muiStyles: (Component, styles) => [Component, makeStyles(styles)],
+    muiStyles: (Component, styles) => {
+        const useStyles = makeStyles(styles);
+
+        return (props) => {
+            const classes = useStyles(props);
+            return <Component {...props} styles={classes} />;
+        };
+    },
 });
 
 export default function initialize(theme) {
-    const muiTheme = createMuiTheme(theme);
-
-    return (App) => ({ props }) => (
-        <ThemeProvider theme={muiTheme}>
-            <App {...props} />
-        </ThemeProvider>
-    );
+    return (App) =>
+        ({ props }) =>
+            (
+                <ThemeProvider theme={theme}>
+                    <App {...props} />
+                </ThemeProvider>
+            );
 }

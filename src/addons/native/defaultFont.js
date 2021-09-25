@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Platform } from 'react-native';
+import { Text, TextInput, Platform } from 'react-native';
 import applyFontGlobally from 'react-native-font-global';
 
 export default function initialize(globalFontFamily, allowScaling) {
@@ -17,6 +17,9 @@ export default function initialize(globalFontFamily, allowScaling) {
 
     if (allowScaling != null) {
         Text.defaultProps = Text.defaultProps || {};
-        Text.defaultProps.allowFontScaling = allowScaling;
+        Text.defaultProps.allowFontScaling = false;
+
+        TextInput.defaultProps = TextInput.defaultProps || {};
+        TextInput.defaultProps.allowFontScaling = false;
     }
 }

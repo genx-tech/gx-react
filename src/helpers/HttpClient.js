@@ -1,5 +1,10 @@
 import request from 'superagent';
-import { join } from '../utils/url';
+import { Platform } from 'react-native';
+import { url as urlUtil } from '@genx/july';
+import _each from 'lodash/each';
+import * as mime from 'react-native-mime-types';
+
+import Runtime from '../Runtime';
 
 const AllowedMethods = {
     get: 'get',
@@ -25,6 +30,7 @@ function setUploadBody(req, body, options) {
             req.field(k, v);
         });
     }
+
     req.attach(options && options.fileField ? options.fileField : 'file', body);
 }
 
@@ -104,13 +110,34 @@ export default class HttpClient {
      * @property {string} [options.fileField="file"] - File field name, default as "file"
      */
     async upload(resource, file, query, options) {
+        if (Runtime.jsRuntime === 'native') {
+            if (typeof file !== 'object' || !file.uri || !file.name) {
+                throw new Error(
+                    'File param should be an object with { uri, name } for uploading from native env.'
+                );
+            }
+
+            let { uri, ...fileOthers } = file;
+
+            if (Platform.OS === 'ios') {
+                uri = uri.replace('file://', '');
+            }
+
+            fileOthers.uri = uri;
+            if (!fileOthers.type) {
+                fileOthers.type = mime.lookup(fileOthers.name); // react native specific
+            }
+
+            file = fileOthers;
+        }
+
         return this._send(
             'upload',
             resToPath(resource),
             query,
             file,
             options,
-            setUploadBody
+            Runtime.jsRuntime === 'node' ? setUploadBody : null
         );
     }
 
@@ -134,15 +161,17 @@ export default class HttpClient {
 
     async _send(method, path, query, body, options, setRequestBody) {
         method = method.toLowerCase();
-        const httpMethod = AllowedMethods[method];
+        const httpMethod = options?.httpMethod || AllowedMethods[method];
         if (!httpMethod) {
             throw new Error('Invalid method: ' + method);
         }
 
         const url =
-            path.startsWith('http:') || path.startsWith('https:')
+            path.startsWith('http:') ||
+            path.startsWith('https:') ||
+            !this.endpoint
                 ? path // absolute url
-                : join(
+                : urlUtil.join(
                       options && options.endpoint
                           ? options.endpoint
                           : this.endpoint,
@@ -155,12 +184,23 @@ export default class HttpClient {
             this.onSending(req, httpMethod, url);
         }
 
+        const extraHeaders = options?.headers;
+        if (extraHeaders) {
+            _each(extraHeaders, (v, k) => {
+                req.set(k, v);
+            });
+        }
+
+        if (options?.withCredentials) {
+            req.withCredentials();
+        }
+
         if (query) {
             req.query(query);
         }
 
         if (setRequestBody) {
-            setRequestBody(req);
+            setRequestBody(req, body, options);
         } else {
             req.send(body);
         }

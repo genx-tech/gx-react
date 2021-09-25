@@ -11,9 +11,20 @@ const mapLogLevels = {
     verbose: VERBOSE,
     info: INFO,
     warning: WARNING,
+    warn: WARNING,
     error: ERROR,
     disable: ERROR + 1,
 };
+
+const levelText = [
+    'uknown',
+    'debug',
+    'verbose',
+    'info',
+    'warning',
+    'error',
+    'disable',
+];
 
 export const getLogLevel = () => logLevel;
 
@@ -32,4 +43,7 @@ export const makeLogger = (logger) => (level, logInfoProducer) => {
 };
 
 export const consoleLogger = (level, args) =>
-    (level > INFO ? console.error : console.log)(`[${level}]`, ...args);
+    (level > WARNING ? console.error : console.log)(
+        `[${levelText[level]}]`,
+        ...args
+    );

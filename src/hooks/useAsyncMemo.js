@@ -6,8 +6,13 @@ import useAsyncCallback from './useAsyncCallback';
  * @param {*} fn
  * @param {*} deps
  */
-export default function useAsyncMemo(fn, deps) {
-    const [state, callback] = useAsyncCallback(fn, deps, true);
+export default function useAsyncMemo(fn, deps, reloadable) {
+    const [state, callback] = useAsyncCallback(
+        fn,
+        deps,
+        { loading: true },
+        reloadable
+    );
 
     useEffect(() => {
         callback();

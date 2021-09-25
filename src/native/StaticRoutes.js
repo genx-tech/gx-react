@@ -3,6 +3,7 @@ import { enableScreens } from 'react-native-screens';
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import Runtime from '../Runtime';
 
@@ -14,6 +15,10 @@ if (Runtime.useNativeStack) {
 } else {
     stackNavigatorCreator = createStackNavigator;
 }
+
+const Stack = stackNavigatorCreator();
+const Tab = createBottomTabNavigator();
+const TopTab = createMaterialTopTabNavigator();
 
 const renderScreens = (Screen, screens) =>
     screens.map((node, i) => {
@@ -31,16 +36,16 @@ const renderScreens = (Screen, screens) =>
     });
 
 const BottomTabNavigator = ({ screens, ...props }) => {
-    const Tab = useMemo(() => createBottomTabNavigator(), []);
+    const screenOptions = useMemo(() => {
+        const mapOfIcon = screens.reduce(
+            (r, node) => ((r[node.name] = node.icon), r),
+            {}
+        );
 
-    const mapOfIcon = screens.reduce((r, node) => {
-        r[node.name] = node.icon;
-        return r;
-    }, {});
-
-    const screenOptions = ({ route }) => ({
-        tabBarIcon: mapOfIcon[route.name],
-    });
+        return ({ route }) => ({
+            tabBarIcon: mapOfIcon[route.name],
+        });
+    }, [screens]);
 
     return (
         <Tab.Navigator screenOptions={screenOptions} {...props}>
@@ -50,8 +55,6 @@ const BottomTabNavigator = ({ screens, ...props }) => {
 };
 
 const StackNavigator = ({ screens, ...props }) => {
-    const Stack = useMemo(() => stackNavigatorCreator(), []);
-
     return (
         <Stack.Navigator {...props}>
             {renderScreens(Stack.Screen, screens)}
@@ -59,9 +62,18 @@ const StackNavigator = ({ screens, ...props }) => {
     );
 };
 
+const TopTabNavigator = ({ screens, ...props }) => {
+    return (
+        <TopTab.Navigator {...props}>
+            {renderScreens(TopTab.Screen, screens)}
+        </TopTab.Navigator>
+    );
+};
+
 const mapOfNavigator = {
     bottomTab: BottomTabNavigator,
     stack: StackNavigator,
+    topTab: TopTabNavigator,
 };
 
 const StaticRoutes = ({ type = 'stack', ...props }) => {

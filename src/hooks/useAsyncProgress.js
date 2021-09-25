@@ -6,8 +6,13 @@ import useAsyncCallback from './useAsyncCallback';
  * @param {*} fn
  * @param {*} deps
  */
-export default function useAsyncProgress(fn, deps) {
-    const [state, callback, applyChange] = useAsyncCallback(fn, deps, true);
+export default function useAsyncProgress(fn, deps, reloadable) {
+    const [state, callback, applyChange] = useAsyncCallback(
+        fn,
+        deps,
+        { loading: true },
+        reloadable
+    );
     const setProgress = useCallback(
         (progress) => {
             applyChange({ progress });

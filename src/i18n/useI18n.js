@@ -92,7 +92,7 @@ export default function useI18n(moduleName) {
         return {
             ...state,
             intl,
-            t: identity,
+            T: identity,
         };
     }
 
@@ -101,7 +101,7 @@ export default function useI18n(moduleName) {
     return {
         loading: false,
         intl,
-        t: (messageId, vars) =>
+        T: (messageId, vars) =>
             intlMessages[messageId] == null
                 ? passThrough(messageId)
                 : intl.formatMessage(intlMessages[messageId], vars),
