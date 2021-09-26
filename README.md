@@ -2,8 +2,6 @@
 
 Gen-X React Library (React & React Native)
 
-Version 0.1.0
-
 ## Installation
 
 ```sh

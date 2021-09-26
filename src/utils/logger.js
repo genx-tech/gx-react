@@ -35,7 +35,8 @@ export const makeLogger = (logger) => (level, logInfoProducer) => {
         mapLogLevels[level] >= logLevel ? mapLogLevels[level] : 0;
 
     if (enabledLogLevel) {
-        let args = logInfoProducer();
+        let args =
+            typeof logInfoProducer === 'function' ? logInfoProducer() : args;
         Array.isArray(args) || (args = [args]);
 
         logger(enabledLogLevel, args);

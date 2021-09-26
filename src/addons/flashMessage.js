@@ -3,7 +3,7 @@ import FlashMessage, {
     showMessage,
     hideMessage,
 } from 'react-native-flash-message';
-import Runtime, { applyScreenComposer } from '../../Runtime';
+import Runtime, { applyScreenComposer } from '../Runtime';
 
 Runtime.register('react-native-flash-message', { showMessage, hideMessage });
 

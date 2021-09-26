@@ -32,15 +32,15 @@
         "access": "public"
     },
     "devDependencies": {
-        "@react-native-community/bob": "^0.17.1",
-        "husky": "^7.0.2",
-        "lerna": "^4.0.0",
-        "patch-package": "^6.4.7",
         "@commitlint/cli": "^13.1.0",
         "@commitlint/config-conventional": "^13.1.0",
         "@react-native-community/eslint-config": "^2.0.0",
         "eslint": "7.14.0",
-        "prettier": "^2.4.1"
+        "husky": "^7.0.2",
+        "lerna": "^4.0.0",
+        "patch-package": "^6.4.7",
+        "prettier": "^2.4.1",
+        "react-native-builder-bob": "^0.18.1"
     },
     "peerDependencies": {
         "react": "*",
@@ -94,7 +94,8 @@
         "mobx": "^6.3.3",
         "mobx-react-lite": "^3.2.1",
         "react-intl": "^5.20.10",
-        "react-native-elements": "^3.4.2",        
+        "react-native-elements": "^3.4.2",
+        "react-native-flash-message": "^0.2.0",
         "react-native-image-zoom-viewer": "^3.0.1",
         "react-native-mime-types": "^2.3.0",
         "react-native-pager-view": "^5.4.4",
@@ -103,7 +104,7 @@
         "react-native-tab-view": "^3.1.1",
         "superagent": "^6.1.0"
     },
-    "@react-native-community/bob": {
+    "react-native-builder-bob": {
         "source": "src",
         "output": "lib",
         "targets": [

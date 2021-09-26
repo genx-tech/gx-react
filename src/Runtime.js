@@ -1,29 +1,22 @@
-import checkJsRuntime from './utils/checkJsRuntime';
 import {
     makeLogger,
     consoleLogger,
     getLogLevel,
     setLogLevel,
 } from './utils/logger';
+import _defaults from 'lodash/defaults';
 
 export const applyScreenComposer = (hoc) => config.screenComposers.push(hoc);
 export const updateRuntime = (addon) => Object.assign(config, addon);
+export const defaultRuntime = (addon) => _defaults(config, addon);
 export const setupScreen = (elScreen) =>
     config.screenComposers.reduce((r, hoc) => (r = hoc(elScreen)), elScreen);
 
-const jsRuntime = checkJsRuntime();
 const modulesRegistry = {};
-
-const finalizeConfig = () => {
-    //...
-
-    Object.freeze(config);
-};
 
 const config = {
     //configurable runtime settings
-    jsRuntime, // web, native, node
-    defaultStyleMode: jsRuntime === 'native' ? 'galio' : 'mui',
+    defaultStyleMode: 'galio',
     useMobxProvider: false,
     screenComposers: [],
 
@@ -52,7 +45,7 @@ const config = {
 
     //updater
     update: updateRuntime,
-    finalize: finalizeConfig,
+    default: defaultRuntime,
 };
 
 export default config;

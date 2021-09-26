@@ -1,1 +1,1 @@
-{"version":3,"sources":["index.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;AAAA;;AACA","sourcesContent":["export { default as StaticRoutes } from './StaticRoutes';\nexport { default as CheckBox } from './CheckBox';\n"]}
+{"version":3,"sources":[],"names":[],"mappings":"","sourcesContent":[]}
