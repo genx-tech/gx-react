@@ -1,6 +1,7 @@
 import React from 'react';
 import SampleScreen from 'screens/sample/SampleScreen';
 import MeStack from 'packages/sample';
+import { Icon } from '@genx/react';
 
 export default {
     initialRouteName: 'Main',
@@ -13,7 +14,7 @@ export default {
             },
             nestedOptions: {
                 initialRouteName: 'Home',
-                tabBarOptions: {
+                screenOptions: {
                     labelStyle: {
                         fontWeight: 'bold',
                     },

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { Block } from 'galio-framework';
 import { setupScreen } from '../Runtime';
@@ -11,15 +10,6 @@ const AppContainer = ({ locale, children, iconFamilies, ...props }) => {
     const elMainScreen = setupScreen(children);
 
     return (
-        <Block flex>
-            <Text>"Hello"</Text>
-        </Block>
-    );
-
-    /*
-     
-
-    return (
         <AppContext.Provider value={{ iconFamilies }}>
             <I18nProvider locale={locale}>
                 <NavigationContainer {...props}>
@@ -27,7 +17,7 @@ const AppContainer = ({ locale, children, iconFamilies, ...props }) => {
                 </NavigationContainer>
             </I18nProvider>
         </AppContext.Provider>
-    ); */
+    );
 };
 
 export default AppContainer;
