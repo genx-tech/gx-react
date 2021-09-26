@@ -1,4 +1,4 @@
-export { default as Runtime } from './Runtime';
+export { default as Runtime, composeScreen } from './Runtime';
 export * from './hoc';
 export * from './i18n';
 export * from './helpers';

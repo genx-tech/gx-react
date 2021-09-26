@@ -11,10 +11,9 @@
         "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
         "build": "bob build",
         "release": "release-it",
-        "native": "cd examples/native && npm run ios",
         "patch": "patch-package",
-        "prepare": "husky install && patch-package",
-        "web": "npm run build && cd web-example && sh ./scripts/runAsExample.sh"
+        "prepare": "husky install && npm run patch",
+        "commitlint": "commitlint --edit \"$1\""
     },
     "keywords": [
         "react-native",
@@ -37,7 +36,6 @@
         "@react-native-community/eslint-config": "^2.0.0",
         "eslint": "7.14.0",
         "husky": "^7.0.2",
-        "lerna": "^4.0.0",
         "patch-package": "^6.4.7",
         "prettier": "^2.4.1",
         "react-native-builder-bob": "^0.18.1"

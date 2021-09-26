@@ -6,7 +6,7 @@ import {
 } from './utils/logger';
 import _defaults from 'lodash/defaults';
 
-export const applyScreenComposer = (hoc) => config.screenComposers.push(hoc);
+export const composeScreen = (hoc) => config.screenComposers.push(hoc);
 export const updateRuntime = (addon) => Object.assign(config, addon);
 export const defaultRuntime = (addon) => _defaults(config, addon);
 export const setupScreen = (elScreen) =>
