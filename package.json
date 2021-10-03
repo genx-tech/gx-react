@@ -15,7 +15,7 @@
         "prepare": "husky install && npm run patch",
         "commitlint": "commitlint --edit \"$1\"",
         "android": "react-native run-android",
-        "ios": "react-native run-ios",        
+        "ios": "react-native run-ios",
         "link": "react-native link",
         "pod": "cd ios && pod install",
         "reset": "react-native start --reset-cache"
