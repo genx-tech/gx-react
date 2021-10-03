@@ -14,6 +14,9 @@ import '@genx/react-addon/navigations/stackNative';
 import '@genx/react-addon/navigations/bottomTabNative';
 import '@genx/react-addon/navigations/topTabMaterial';
 
+import SampleScreen from 'screens/sample/SampleScreen';
+import MeStack from 'packages/sample';
+
 Runtime.setLogLevel('debug');
 
 initLocale(registerLocale);
@@ -21,7 +24,13 @@ initLocale(registerLocale);
 const App = ({}) => {
     return (
         <AppContainer locale={'en-AU'}>
-            <AppNavigator {...appRoutes} />
+            <AppNavigator
+                _registry={{
+                    SampleScreen,
+                    MeStack,
+                }}
+                {...appRoutes}
+            />
         </AppContainer>
     );
 };

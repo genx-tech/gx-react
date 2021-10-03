@@ -6,19 +6,18 @@ import {
 } from './utils/logger';
 import _defaults from 'lodash/defaults';
 
-export const composeScreen = (hoc) => config.screenComposers.push(hoc);
+export const composeScreen = (hoc) => globalScreenComposers.push(hoc);
 export const updateRuntime = (addon) => Object.assign(config, addon);
 export const defaultRuntime = (addon) => _defaults(config, addon);
 export const setupScreen = (elScreen) =>
-    config.screenComposers.reduce((r, hoc) => (r = hoc(elScreen)), elScreen);
+    globalScreenComposers.reduce((r, hoc) => (r = hoc(elScreen)), elScreen);
 
 const modulesRegistry = {};
+const globalScreenComposers = [];
 
 const config = {
     //configurable runtime settings
     defaultStyleMode: 'galio',
-    useMobxProvider: false,
-    screenComposers: [],
 
     //i18n
     localePathBuilder: (locale, moduleName) =>

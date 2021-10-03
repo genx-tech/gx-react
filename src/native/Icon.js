@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import { Icon } from 'react-native-elements';
 import { AppContext } from './AppContainer';
+import Runtime from '../Runtime';
 
 function IconEx({ type, ...rest }) {
     const appContext = useContext(AppContext);
 
     if (type.startsWith('x-')) {
         if (!appContext.iconFamilies) {
-            throw new Error('Missing "iconFamilies" in app context!');
+            Runtime.log('error', 'Missing "iconFamilies" in app context!');
+            return null;
         }
 
         type = type.substr(2);

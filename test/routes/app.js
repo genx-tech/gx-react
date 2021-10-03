@@ -1,19 +1,17 @@
-import React from 'react';
-import SampleScreen from 'screens/sample/SampleScreen';
-import MeStack from 'packages/sample';
-import { Icon } from '@genx/react';
-
 export default {
     initialRouteName: 'Main',
     screens: [
         {
             name: 'Main',
-            nested: 'bottomTab',
+            // navigator options
             options: {
                 headerShown: false,
             },
-            nestedOptions: {
+            component: 'Navigator',
+            componentProps: {
+                type: 'bottomTab',
                 initialRouteName: 'Home',
+                // screen options
                 screenOptions: {
                     tabBarLabelStyle: {
                         fontWeight: 'bold',
@@ -28,31 +26,26 @@ export default {
                         name: 'Home',
                         options: {
                             title: 'Home',
-                            tabBarIcon: ({ focused, color, size }) => (
-                                <Icon
-                                    type="ionicon"
-                                    name="logo-react"
-                                    size={size}
-                                    color={color}
-                                />
-                            ),
+                            tabBarIcon: {
+                                type: 'ionicon',
+                                name: 'logo-react',
+                            },
                         },
-                        component: SampleScreen,
+                        component: 'SampleScreen',
                     },
                     {
                         name: 'Me',
                         options: {
                             title: 'Me',
-                            tabBarIcon: ({ focused, color, size }) => (
-                                <Icon
-                                    type="ionicon"
-                                    name={focused ? 'person' : 'person-outline'}
-                                    size={size}
-                                    color={color}
-                                />
-                            ),
+                            tabBarIcon: {
+                                type: 'ionicon',
+                                name: 'person-outline',
+                                focused: {
+                                    name: 'person',
+                                },
+                            },
                         },
-                        component: MeStack,
+                        component: 'MeStack',
                     },
                 ],
             },

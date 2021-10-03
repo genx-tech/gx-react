@@ -1,5 +1,3 @@
-import SampleMe from '../screens/SampleMe';
-
 export default {
     type: 'stack',
     initialRouteName: 'MeHome',
@@ -9,7 +7,7 @@ export default {
     screens: [
         {
             name: 'MeHome',
-            component: SampleMe,
+            component: 'SampleMe',
             options: {},
         },
     ],
