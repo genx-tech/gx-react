@@ -2,8 +2,13 @@
 
 ./src
 ./scripts
-./example
-./web-example
+./test
+./.husky
+./android
+./ios
+./jsconfig.json
+./metro.config.js
+./react-native.config.js
 .editorconfig
 .gitignore
 .gitattributes
@@ -12,4 +17,3 @@
 .prettierignore
 .yarnrc
 babel.config.js
-
