@@ -10,6 +10,9 @@ import {
     setLogLevel,
 } from './utils/logger';
 
+const isDevMode =
+    !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+
 export const AppContext = React.createContext({});
 export const composeScreen = (hoc) => globalScreenComposers.push(hoc);
 export const updateRuntime = (addon) => Object.assign(config, addon);
@@ -30,7 +33,7 @@ const globalProviders = [];
 const finalizeConfig = () => {
     //todo: detect debug param in url and then set log level
 
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    if (isDevMode) {
         //all runtime configs are supposed to be unchanged during the whole app life cycle
         Object.freeze(config);
         Object.freeze(modulesRegistry);
@@ -40,6 +43,7 @@ const finalizeConfig = () => {
 };
 
 const config = {
+    isDevMode,
     //configurable runtime settings
     defaultStyleMode: 'galio',
     useNativeView: false,
