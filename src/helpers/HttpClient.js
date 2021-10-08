@@ -1,10 +1,6 @@
 import request from 'superagent';
-import { Platform } from 'react-native';
 import { url as urlUtil } from '@genx/july';
 import _each from 'lodash/each';
-import * as mime from 'react-native-mime-types';
-
-const isMobileMode = Platform.OS === 'ios' || Platform.OS === 'android';
 
 const AllowedMethods = {
     get: 'get',
@@ -110,34 +106,13 @@ export default class HttpClient {
      * @property {string} [options.fileField="file"] - File field name, default as "file"
      */
     async upload(resource, file, query, options) {
-        if (isMobileMode) {
-            if (typeof file !== 'object' || !file.uri || !file.name) {
-                throw new Error(
-                    'File param should be an object with { uri, name } for uploading from native env.'
-                );
-            }
-
-            let { uri, ...fileOthers } = file;
-
-            if (Platform.OS === 'ios') {
-                uri = uri.replace('file://', '');
-            }
-
-            fileOthers.uri = uri;
-            if (!fileOthers.type) {
-                fileOthers.type = mime.lookup(fileOthers.name); // react native specific
-            }
-
-            file = fileOthers;
-        }
-
         return this._send(
             'upload',
             resToPath(resource),
             query,
             file,
             options,
-            isMobileMode ? null : setUploadBody
+            setUploadBody
         );
     }
 

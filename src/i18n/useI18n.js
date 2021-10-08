@@ -3,7 +3,6 @@ import { useIntl, defineMessages } from 'react-intl';
 
 import Runtime from '../Runtime';
 import useAsyncMemo from '../hooks/useAsyncMemo';
-import { identity } from '../utils/callback';
 import { I18nContext } from './I18nProvider';
 import passThrough from './passThrough';
 
@@ -12,10 +11,11 @@ import passThrough from './passThrough';
  *  Lazy locale loading, better performance for web app
  *  Messages grouped by modules
  *
- * @see {@link https://formatjs.io/guides/message-syntax/} for message syntax
+ * @see {@link https://formatjs.io/docs/core-concepts/icu-syntax} for message syntax
  */
 
 const cache = {};
+const identity = (v) => v;
 
 /**
  * Register a preloaded locale module
